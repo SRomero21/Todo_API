@@ -12,7 +12,7 @@ const App = () => {
 	const [todos, setTodos] = useState([]);
 
 	const addTodo = async todo => {
-		await axios.post(`http://localhost:4000/`, {
+		await axios.post(`http://localhost:4000/api/v1/todos`, {
 			content: todo.content,
 		}); // req.body.content
 
@@ -20,7 +20,7 @@ const App = () => {
 	};
 
 	const fetchTodos = async () => {
-		const res = await axios.get('http://localhost:4000/');
+		const res = await axios.get('http://localhost:4000/api/v1/todos');
 
 		const resTodos = res.data;
 		console.log(resTodos);
@@ -28,7 +28,7 @@ const App = () => {
 	};
 
 	const editTodo = async (id, newContent) => {
-		await axios.patch(`http://localhost:4000/`, {
+		await axios.patch(`http://localhost:4000/api/v1/${id}`, {
 			content: newContent,
 		});
 
@@ -48,7 +48,7 @@ const App = () => {
 	};
 
 	const deleteTodo = async id => {
-		await axios.delete(`http://localhost:4000/`);
+		await axios.delete(`http://localhost:4000/api/v1/${id}`);
 
 		setTodos(prevState => {
 			const currentTodos = prevState;
